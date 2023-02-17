@@ -1,0 +1,78 @@
+openapi: 3.0.0
+info:
+  title: API Book
+  description: Permite hacer el CRUD de Book que se encuentra en Postgres
+  version: 1.0.0
+
+paths:
+  /books:
+    get:
+      tags:
+        - Book Rest
+      responses:
+        "100":
+          description: Done
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Books'
+    post:
+      tags:
+        - Book Rest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Books-post'
+      responses:
+        "101":
+          description: Done
+  /books/{id}:
+    get:
+      tags:
+        - Book Rest
+      parameters:
+        - name: id
+          in: path
+          required: true
+      responses:
+        "101":
+          description: 'Done'
+          content:
+            application/json:
+              schema:
+                type: object
+
+    put:
+      tags:
+        - Book Rest
+      parameters:
+        - name: id
+          in: path
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Books'
+      responses:
+        '101':
+          description: 'Fail'
+components:
+  responses:
+    Notfound:
+      description: (404) No encontrado
+  schemas:
+    Authors:
+      type: object
+      properties:
+        id:
+          type: string
+        firstName:
+          type: string
+          description: Nombre del autor
+        lastName:
+          type: string
+          description: Apellido del autor
